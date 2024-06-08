@@ -26,7 +26,7 @@ def webServer(port=13331):
       #This variable can store the headers you want to send for any valid or invalid request.   What header should be sent for a response that is ok?
       #Fill in start
       filename = message.split()[1]  # returns the first word in split only ignoring the GET
-      print(filename) #comment this out later
+      #print(filename) #comment this out later
 
       fields = message.split("\r\n")
       fields = fields[1:]  # ignore the GET / HTTP/1.1
@@ -36,13 +36,13 @@ def webServer(port=13331):
           continue
         key, value = field.split(':', 1)
         message_headers[key] = value
-      #print(message_headers) #comment out later
+      print(message_headers) #comment out later
       #Content-Type is an example on how to send a header as bytes. There are more!
 
       #opens the client requested file.
       #Plenty of guidance online on how to open and read a file in python. How should you read it though if you plan on sending it through a socket?
       new_filename = filename.lstrip("/")
-      f = open(new_filename, "rb") #fill in start #fill in end
+      file_to_open = open(new_filename, "rb") #fill in start #fill in end
       #fill in end
       
 
@@ -50,16 +50,20 @@ def webServer(port=13331):
       print("file okay")
       outputdata = [b"HTTP/1.1 200 OK\r\n"]
       outputdata.append(b"Content-Type: text/html; charset=UTF-8\r\n")
-      outputdata.append(b"\r\n")
+      outputdata.append(b"message_headers['Connection']")
+      outputdata.append(b"message_headers['Host']")
+      #outputdata.append(b" ")
+      outputdata.append(b"\r\n\r\n")
 
         #Note that a complete header must end with a blank line, creating the four-byte sequence "\r\n\r\n" Refer to https://w3.cs.jmu.edu/kirkpams/OpenCSF/Books/csf/html/TCPSockets.html
  
       #Fill in end
 
-      for i in f: #for line in file
-      #Fill in start - append your html file contents #Fill in end 
-        outputdata.append (b"f")
-      outputdata.append(b"\r\n")
+      for i in file_to_open: #for line in file
+      #Fill in start - append your html file contents #Fill in end
+        line = file_to_open.readline()
+        outputdata.append (line)
+      outputdata.append(b"\r\n\r\n")
 
 
       #Send the content of the requested file to the client (don't forget the headers you created)!
@@ -79,7 +83,9 @@ def webServer(port=13331):
       print("file not found")
       outputdata = [b"HTTP/1.1 404 Not Found\r\n"]
       outputdata.append(b"Content-Type: text/html; charset=UTF-8\r\n")
-      outputdata.append (b"\r\n\r\n")
+      outputdata.append(b"message_headers['Connection']")
+      outputdata.append(b"message_headers['Host']")
+      outputdata.append(b"\r\n\r\n")
       message_out = bytes().join(outputdata)
       connectionSocket.send(message_out)
 
