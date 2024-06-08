@@ -62,12 +62,11 @@ def webServer(port=13331):
             for i in file_to_open:  #for line in file
                 #Fill in start - append your html file contents #Fill in end
                 line = file_to_open.readline()
-                outputdata.append(line)
+                outputdata.append(bytes(line))
             outputdata.append(b"\r\n\r\n")
-
+            #print(outputdata)
             #Send the content of the requested file to the client (don't forget the headers you created)!
             #Send everything as one send command, do not send one line/item at a time!
-
             # Fill in start
             message_out = bytes().join(outputdata)
             connectionSocket.send(message_out)
