@@ -36,7 +36,7 @@ def webServer(port=13331):
           continue
         key, value = field.split(':', 1)
         message_headers[key] = value
-      print(message_headers) #comment out later
+      #print(message_headers) #comment out later
       #Content-Type is an example on how to send a header as bytes. There are more!
 
       #opens the client requested file.
@@ -47,7 +47,7 @@ def webServer(port=13331):
       
 
 
-      print("file okay")
+      #print("file okay")
       outputdata = [b"HTTP/1.1 200 OK\r\n"]
       outputdata.append(b"Content-Type: text/html; charset=UTF-8\r\n")
       outputdata.append(b"message_headers['Connection']")
@@ -80,7 +80,7 @@ def webServer(port=13331):
       # Send response message for invalid request due to the file not being found (404)
       # Remember the format you used in the try: block!
       #Fill in start
-      print("file not found")
+      #print("file not found")
       outputdata = [b"HTTP/1.1 404 Not Found\r\n"]
       outputdata.append(b"Content-Type: text/html; charset=UTF-8\r\n")
       outputdata.append(b"message_headers['Connection']")
