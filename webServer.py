@@ -50,8 +50,8 @@ def webServer(port=13331):
       #print("file okay")
       outputdata = [b"HTTP/1.1 200 OK\r\n"]
       outputdata.append(b"Content-Type: text/html; charset=UTF-8\r\n")
-      outputdata.append(b"message_headers['Connection']")
-      outputdata.append(b"message_headers['Host']")
+      #outputdata.append(b"message_headers['Connection']")
+      #outputdata.append(b"message_headers['Host']")
       #outputdata.append(b" ")
       outputdata.append(b"\r\n\r\n")
 
