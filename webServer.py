@@ -48,6 +48,7 @@ def webServer(port=13331):
             #fill in end
 
             #print("file okay")
+            #print(new_filename)
             outputdata = [b"HTTP/1.1 200 OK\r\n"]
             outputdata.append(b"Content-Type: text/html; charset=UTF-8\r\n")
             outputdata.append(b"Connection: Keep Alive\r\n")
@@ -58,11 +59,16 @@ def webServer(port=13331):
             #Note that a complete header must end with a blank line, creating the four-byte sequence "\r\n\r\n" Refer to https://w3.cs.jmu.edu/kirkpams/OpenCSF/Books/csf/html/TCPSockets.html
 
             #Fill in end
-
-            for i in file_to_open:  #for line in file
+            file_content = file_to_open.read()
+            #line = file_to_open.readline()
+            #print(line)
+            #i = 2
+            for i in file_content:  #for line in file
+                outputdata.append(bytes(file_content))
+                #print ("inside while")
                 #Fill in start - append your html file contents #Fill in end
-                line = file_to_open.readline()
-                outputdata.append(bytes(line))
+                #line = file_to_open.readline()
+
             outputdata.append(b"\r\n\r\n")
             #print(outputdata)
             #Send the content of the requested file to the client (don't forget the headers you created)!
